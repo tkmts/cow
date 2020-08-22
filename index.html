@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BUNCHO METHOD SKETCH - cow</title>
+<style>
+#canvas {
+	display: block;
+	max-width: 600px;
+	width: 100%;
+	margin: 10px auto;
+}
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+<script>
+const canvasApp = () => {
+
+    const W = 4000; //キャンバスの幅
+    const H = 4000; //キャンバスの高さ
+    const w = 800; //画像の幅
+    const h = 800; //画像の高さ
+    const p = 1040; //画像の間隔
+    const a = 0.3; //2枚目画像の出現率
+    const bg = '#4195a8'; //背景色
+
+    const cvs = document.querySelector('#canvas');
+    const ctx = cvs.getContext('2d');
+    cvs.width = W;
+    cvs.height = H;
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    for (let y = 0; y < 5; y++) {
+        for (let x = 0; x < 5; x++) {
+            const xx = (x - y % 2 * 0.5) * p;
+            const yy = y * p;
+            let m = 0;
+            if (Math.random() < a) {
+                m = 1;
+            }
+            ctx.save();
+            ctx.translate(xx, yy);
+            ctx.rotate(Math.random() * 360 / 180 * Math.PI);
+            ctx.drawImage(parts[m], -w * 0.5, -h * 0.5, w, h);
+            ctx.restore();
+        }
+    };
+}
+
+const init = () => {
+    l++;
+    if (l === n) {
+        canvasApp();
+    }
+}
+
+const n = 2;
+const parts = [];
+let l = 0;
+for (let i = 0; i < n; i++) {
+    const part = new Image();
+    part.onload = init;
+    part.src = 'img/' + i + '.png';
+    parts.push(part);
+}
+</script>
+</html>
