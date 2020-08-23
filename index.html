@@ -25,6 +25,7 @@ const canvasApp = () => {
     const h = 800; //画像の高さ
     const p = 1040; //画像の間隔
     const a = 0.3; //2枚目画像の出現率
+    const n = 5; //繰り返し回数
     const bg = '#4195a8'; //背景色
 
     const cvs = document.querySelector('#canvas');
@@ -34,8 +35,8 @@ const canvasApp = () => {
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    for (let y = 0; y < 5; y++) {
-        for (let x = 0; x < 5; x++) {
+    for (let y = 0; y < n; y++) {
+        for (let x = 0; x < n; x++) {
             const xx = (x - y % 2 * 0.5) * p;
             const yy = y * p;
             let m = 0;
